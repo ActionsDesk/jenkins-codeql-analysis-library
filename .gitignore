@@ -1,8 +1,11 @@
 
 /*
-!/jobs
+!/.github
 !/.gitignore
 !/*.xml
+!/LICENSE
+!/README*
+!/jobs
 
 jobs/**
 !jobs/**/
