@@ -1,0 +1,12 @@
+
+/*
+!/jobs
+!/.gitignore
+!/*.xml
+
+jobs/**
+!jobs/**/
+
+!config.xml
+
+jobs/**/*workspace
