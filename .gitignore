@@ -6,6 +6,9 @@
 !/LICENSE
 !/README*
 !/jobs
+!/resources
+!/vars
+!/src
 
 jobs/**
 !jobs/**/
