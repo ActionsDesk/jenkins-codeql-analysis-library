@@ -7,7 +7,7 @@ We're thrilled that you'd like to contribute to this project. Your help is essen
 
 [Pull Requests][pulls] are used for adding new playbooks, roles, and documents to the repository, or editing the existing ones.
 
-**With write access**
+### With write access
 
 1. Clone the repository (only if you do not have write access)
 1. Create a new branch: `git checkout -b my-branch-name`
@@ -15,7 +15,7 @@ We're thrilled that you'd like to contribute to this project. Your help is essen
 1. Push and [submit a pull request][pr]
 1. Pat yourself on the back and wait for your pull request to be reviewed and merged.
 
-**Without write access**
+### Without write access
 
 1. [Fork][fork] and clone the repository
 1. Create a new branch: `git checkout -b my-branch-name`
