@@ -1,6 +1,19 @@
 # Jenkins Shared Library: CodeQL Analysis
 
-This [shared library](https://jenkins.io/doc/book/pipeline/shared-libraries/) allows Jenkins pipelines to initialize and perform CodeQL analysis on a project.
+This [shared library](https://jenkins.io/doc/book/pipeline/shared-libraries/) allows Jenkins pipelines to initialize and perform CodeQL analysis on a project. There exists a [Jenkins CodeQL plugin](https://plugins.jenkins.io/codeql/), but currently it only supports installing and setting up the [CodeQL CLI](https://codeql.github.com/docs/codeql-cli/) on a Jenkins agent during a build.
+
+## Purpose
+
+At a high level, the purpose of this library is to perform the following:
+
+- Download CodeQL
+- Detect languages of the project
+- Run dynamic CodeQL init step
+- if (language == compiled)
+  - Trace the build (set environment variables)
+- Run commands in plugin block
+- Run finalize and analyze commands on all databases
+- Upload results to the project repository
 
 ## References
 
