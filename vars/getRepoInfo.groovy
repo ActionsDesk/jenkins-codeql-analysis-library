@@ -12,8 +12,7 @@ List<String> getLanguages(String CREDID) {
     def interpretedLanguages = []
 
     // Parse out the host and org/repo from the GIT_URL
-    String gitHost, gitOrgRepo
-    gitHost, gitOrgRepo = parseRepoUrl()
+    String (gitHost, gitOrgRepo) = parseRepoUrl()
 
     println('gitHost: ' + gitHost)
     println('gitOrgRepo: ' + gitOrgRepo)
