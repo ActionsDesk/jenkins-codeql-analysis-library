@@ -4,7 +4,11 @@ String call() {
     */
 
     println('Begin GitHub CLI Install procedure')
-    println("Operating system is: " + System.getProperty("os.name"))
+
+    OS_NAME = sh(script: 'cat /etc/os-release | grep -i "^NAME"', returnStdout: true).split('=')[1].trim()
+
+
+    println("Operating system is: " + OS_NAME)
 
     // https://cli.github.com/manual/installation
     /*
