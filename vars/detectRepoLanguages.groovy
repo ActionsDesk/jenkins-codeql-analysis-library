@@ -1,4 +1,4 @@
-List<String> call() {
+List<String> call(String credId) {
     /**
     *  Gets and returns the list of languages detected in the repository.
     *
@@ -34,9 +34,10 @@ List<String> call() {
 
     // debug
     sh 'printenv'
+    withCredentials([string(credentialsId: credId, variable: 'AUTHTOKEN')])
 
     // Call the languages API
-    repoLanguages = sh(script: "curl --request GET '${languagesUrl}' --header 'Accept: application/vnd.github.v3+json' --header 'Authorization: token ${credentials('AUTH_TOKEN')}'", returnStdout: true).toString().trim()
+    repoLanguages = sh(script: "curl --request GET '${languagesUrl}' --header 'Accept: application/vnd.github.v3+json' --header 'Authorization: token ${credentials('AUTHTOKEN')}'", returnStdout: true).toString().trim()
     println('Repository languages detected:' + repoLanguages)
     def repoLanguagesJSON = new groovy.json.JsonSlurper().parseText(repoLanguages)
 
