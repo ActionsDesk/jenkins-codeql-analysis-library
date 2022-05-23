@@ -1,4 +1,4 @@
-String[], String[] call() {
+String[] call() {
     /**
     *  Gets and returns the list of languages detected in the repository.
     *
