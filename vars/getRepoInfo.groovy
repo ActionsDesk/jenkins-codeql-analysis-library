@@ -14,7 +14,7 @@ List<String> getLanguages(String CREDID) {
     // Parse out the host and org/repo from the GIT_URL
     String gitHost
     String gitOrgRepo
-    (gitHost, gitOrgRepo) = parseRepoUrl()
+    (gitHost, gitOrgRepo) = parseGitUrl()
 
     println('gitHost: ' + gitHost)
     println('gitOrgRepo: ' + gitOrgRepo)
@@ -53,7 +53,7 @@ List<String> getLanguages(String CREDID) {
     return [compiledLanguages, interpretedLanguages]
 }
 
-String parseRepoUrl() {
+String parseGitUrl() {
     /**
     *  Parses the GIT_URL passed by the Jenkins job into host, org, and repo values.
     *
