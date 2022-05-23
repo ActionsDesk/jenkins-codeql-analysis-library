@@ -31,8 +31,8 @@ String[] call() {
     // Call the languages API
     repoLanguages = sh(script: "curl --request GET 'https://api.github.com/repos/microsoft/vscode/languages' --header 'Accept: application/vnd.github.v3+json'", returnStdout: true).toString().trim()
     println('Repository languages detected:')
-    repoLanguages.items.each {
-        println('\t' + it.key + ': ' + it.value)
+    repoLanguages.each {key, value ->
+        println('\t' + key + ': ' + value)
     }
 
     // Return the result
