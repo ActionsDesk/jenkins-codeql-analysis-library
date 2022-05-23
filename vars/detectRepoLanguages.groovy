@@ -14,7 +14,8 @@ String[] call() {
         server = trimmedGitUrl.split(":")[0]
         orgRepo = trimmedGitUrl.split(":")[1]
 
-        sh 'printenv'
+        println('server: ' + server)
+        println('orgRepo: ' + orgRepo)
 
     } else {                        // HTTPS
         println("HTTPS URL")
