@@ -25,12 +25,7 @@ String[] call() {
     println('gitOrgRepo: ' + gitOrgRepo)
 
     // Call the languages API
-    String languagesUrl
-    if (gitHost == 'github.com')
-        languagesUrl = "https://api.github.com/repos/" + gitOrgRepo + "/languages"
-    else
-        languagesUrl = "https://" + gitHost + "/api/v3/repos/" + gitOrgRepo + "/languages"
-
+    String languagesUrl = (gitHost == 'github.com') ? "https://api.github.com/repos/${gitOrgRepo}/languages" : "https://${gitHost}/api/v3/repos/${gitOrgRepo}/languages"
     println('languagesUrl: ' + languagesUrl)
 
     repoLanguages = "1.0.0"
