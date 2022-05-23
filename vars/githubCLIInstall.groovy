@@ -31,4 +31,7 @@ String call() {
     GH_CLI_INSTALLED_VERSION = "1.0.0"
     return GH_CLI_INSTALLED_VERSION
 
+
+    // def GH_CLI_INSTALLED_VERSION = githubCLIInstall()
+    // echo "The GitHub CLI installed version is: ${GH_CLI_INSTALLED_VERSION}"
 }
