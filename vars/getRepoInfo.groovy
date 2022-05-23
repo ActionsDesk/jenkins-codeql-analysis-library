@@ -1,4 +1,4 @@
-List<String> call(String CREDID) {
+List<String> getLanguages(String CREDID) {
     /**
     *  Gets and returns the list of languages detected in the repository.
     *
