@@ -1,8 +1,9 @@
-def call(String version = 'latest') {
+String call(String version = 'latest') {
     /**
-    * Installs the specified CodeQL bundle version
+    * Gets the latest CodeQL bundle version.
     *
     * @param version The version of the CodeQL bundle to install
+    * @return The latest version of the CodeQL bundle
     */
 
     // If we specify 'latest', then go get the latest release
