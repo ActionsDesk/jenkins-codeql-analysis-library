@@ -54,8 +54,8 @@ List<String> call() {
     }
 
     // debug
-    println('compiledLanguages: ' + compiledLanguages)
-    println('interpretedLanguages: ' + interpretedLanguages)
+    println('CodeQL-supported compiled languages found: ' + compiledLanguages)
+    println('CodeQL-supported interpreted languages found: ' + interpretedLanguages)
 
     return [compiledLanguages, interpretedLanguages]
 }
