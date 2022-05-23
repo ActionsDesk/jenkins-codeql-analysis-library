@@ -1,4 +1,4 @@
-String call(String version, String os = 'linux') {
+def call(String version, String os = 'linux') {
     /**
     * Downloads the requested CodeQL version
     *
@@ -46,12 +46,13 @@ String call(String version, String os = 'linux') {
     sh(script: 'mv ./codeql/codeql ./codeql/bin', returnStdout: true)
 
     // Create bin symlink
-    println('Create bin symlink...')
-    sh(script: 'ln -s ' + CODEQL_CLI_PATH + ' /usr/bin/codeql', returnStdout: true)
+    //println('Create bin symlink...')
+    //sh(script: 'ln -s ' + CODEQL_CLI_PATH + ' /usr/bin/codeql', returnStdout: true)
 
     // Display downloaded version
     println('CodeQL CLI Version')
-    sh(script: 'codeql --version', returnStdout: true)
+    //sh(script: 'codeql --version', returnStdout: true)
+    sh(script: CODEQL_CLI_PATH + ' --version', returnStdout: true)
 
     // Cleaning up image
     println('Cleaning up image...')
