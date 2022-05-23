@@ -32,8 +32,11 @@ List<String> call() {
     String languagesUrl = (gitHost == 'github.com') ? "https://api.github.com/repos/${gitOrgRepo}/languages" : "https://${gitHost}/api/v3/repos/${gitOrgRepo}/languages"
     println('languagesUrl: ' + languagesUrl)
 
+    // debug
+    sh 'printenv'
+
     // Call the languages API
-    repoLanguages = sh(script: "curl --request GET '${languagesUrl}' --header 'Accept: application/vnd.github.v3+json'", returnStdout: true).toString().trim()
+    repoLanguages = sh(script: "curl --request GET '${languagesUrl}' --header 'Accept: application/vnd.github.v3+json' --header 'Authorization: token ${AUTH_TOKEN}'", returnStdout: true).toString().trim()
     println('Repository languages detected:' + repoLanguages)
     def repoLanguagesJSON = new groovy.json.JsonSlurper().parseText(repoLanguages)
 
