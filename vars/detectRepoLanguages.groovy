@@ -24,10 +24,15 @@ String[] call() {
     println('gitHost: ' + gitHost)
     println('gitOrgRepo: ' + gitOrgRepo)
 
-    // Call the languages API
+    // Form the languages API URL
     String languagesUrl = (gitHost == 'github.com') ? "https://api.github.com/repos/${gitOrgRepo}/languages" : "https://${gitHost}/api/v3/repos/${gitOrgRepo}/languages"
     println('languagesUrl: ' + languagesUrl)
 
-    repoLanguages = "1.0.0"
-    return repoLanguages
+    // Call the languages API
+    repoLanguages = sh(script: "curl --request GET 'https://api.github.com/repos/microsoft/vscode/languages' --header 'Accept: application/vnd.github.v3+json'", returnStdout: true).toString().trim()
+    println('repoLanguages: ' + repoLanguages)
+
+    // Return the result
+    repoLanguagesTBD = "1.0.0"
+    return repoLanguagesTBD
 }
