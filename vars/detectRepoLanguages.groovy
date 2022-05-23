@@ -6,7 +6,7 @@ String[] call() {
     println('Begin detect repository language procedure')
 
     // https://docs.github.com/en/rest/repos/repos#list-repository-languages
-    if (GIT_URL.contains("@")) {}
+    if (GIT_URL.contains("@")) {
         println("SSH URL")
     } else {
         println("HTTPS URL")
