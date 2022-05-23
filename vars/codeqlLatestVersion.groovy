@@ -9,7 +9,7 @@ String call(String version = 'latest') {
     println('Get CodeQL Version specified: ' + version)
 
     latestVersion = sh(script: "curl --silent 'https://api.github.com/repos/github/codeql-action/releases/latest' | grep '\"tag_name\":'", returnStdout: true).toString().trim()
-    latestVersion = latestVersion.split('\"')[2].trim()
+    latestVersion = latestVersion.split('\"')[3].trim()
 
 
     println('Retrieved the Latest version number: ' + latestVersion)
