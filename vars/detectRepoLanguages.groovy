@@ -31,17 +31,15 @@ String[] call() {
     // Call the languages API
     repoLanguages = sh(script: "curl --request GET 'https://api.github.com/repos/microsoft/vscode/languages' --header 'Accept: application/vnd.github.v3+json'", returnStdout: true).toString().trim()
     println('Repository languages detected:' + repoLanguages)
-    
+    def repoLanguagesJSON = jsonSlurper.parseText(repoLanguages)
+
     String[] compiledLanguagesArray = CODEQL_COMPILED_LANGUAGES.split("|")
     for (String language in compiledLanguagesArray) {
         println("debug language: " + language)
     }
 
-    while(repoLanguages.hasNext()) {
-        String language = repoLanguages.next()
-        if (lang.get(key) instanceof JSONObject) {
-            println("debug lang: " + lang)
-        }
+    repoLanguagesJSON.each {
+        println("jsonslurper: ${it.key}: ${it.value}")
     }
 
     // Return the result
