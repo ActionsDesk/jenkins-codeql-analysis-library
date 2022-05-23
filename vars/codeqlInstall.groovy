@@ -1,4 +1,4 @@
-String call(String version, String os = 'linux') {
+String call(String version) {
     /**
     * Installs the requested CodeQL version
     *
