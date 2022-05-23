@@ -14,7 +14,7 @@ List<String> getLanguages(String CREDID) {
     // Parse out the host and org/repo from the GIT_URL
     String gitHost
     String gitOrgRepo
-    gitHost, gitOrgRepo = parseRepoUrl()
+    (gitHost, gitOrgRepo) = parseRepoUrl()
 
     println('gitHost: ' + gitHost)
     println('gitOrgRepo: ' + gitOrgRepo)
@@ -73,5 +73,5 @@ String parseRepoUrl() {
         gitOrgRepo = uri.getPath().replace(".git","")
     }
 
-    return [gitHost, gitOrgRepo]
+    return (gitHost, gitOrgRepo)
 }
