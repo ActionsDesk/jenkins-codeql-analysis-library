@@ -6,16 +6,21 @@ String[] call() {
     println('Begin detect repository language procedure')
 
     // https://docs.github.com/en/rest/repos/repos#list-repository-languages
-    if (GIT_URL.contains("@")) {
-        println("SSH URL")
-    } else {
+    URI uri
+    String server, orgRepo
+    if (GIT_URL.contains("@")) {    // SSH
+        trimmedGitUrl = GIT_URL.split("@")[1]
+        //uri = new URI(trimmed)
+        server = trimmedGitUrl.split(":")[0]
+        orgRepo = trimmedGitUrl.split(":")[1].split(".")[0]
+
+        sh 'printenv'
+        
+    } else {                        // HTTPS
         println("HTTPS URL")
+        uri = new URI(GIT_URL)
     }
 
-    //URI uri = new URI(GIT_URL)
-    //GITHUB_REPO_URL = uri.getHost()
-
-    //println('GitHub Repo URL: ' + GITHUB_REPO_URL)
 
 
     GH_CLI_INSTALLED_VERSION = "1.0.0"
