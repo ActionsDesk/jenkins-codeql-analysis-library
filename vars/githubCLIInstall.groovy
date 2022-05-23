@@ -5,7 +5,7 @@ String call() {
 
     println('Begin GitHub CLI Install procedure')
 
-    OS_NAME = sh(script: 'cat /etc/os-release | grep -i "^NAME"', returnStdout: true).split('=')[1].trim()
+    OS_NAME = sh(script: 'cat /etc/os-release | grep -i "^NAME"', returnStdout: true).split('=')[1].replace("\"", "").trim()
 
 
     println("Operating system is: " + OS_NAME)
