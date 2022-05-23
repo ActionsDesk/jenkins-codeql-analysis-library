@@ -33,7 +33,7 @@ List<String> call() {
     println('languagesUrl: ' + languagesUrl)
 
     // Call the languages API
-    repoLanguages = sh(script: "curl --request GET 'https://api.github.com/repos/microsoft/vscode/languages' --header 'Accept: application/vnd.github.v3+json'", returnStdout: true).toString().trim()
+    repoLanguages = sh(script: "curl --request GET '${languagesUrl}' --header 'Accept: application/vnd.github.v3+json'", returnStdout: true).toString().trim()
     println('Repository languages detected:' + repoLanguages)
     def repoLanguagesJSON = new groovy.json.JsonSlurper().parseText(repoLanguages)
 
