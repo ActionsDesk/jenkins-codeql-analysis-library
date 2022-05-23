@@ -51,9 +51,10 @@ def call(String version, String os = 'linux') {
 
     // Display downloaded version
     println('The workspace is: ' + WORKSPACE)
+    env.PATH = env.PATH + ':' + CODEQL_BIN_PATH + '/bin'
     println('CodeQL CLI Version')
-    //sh(script: 'codeql --version', returnStdout: true)
-    sh(script: CODEQL_CLI_PATH + ' --version', returnStdout: true)
+    sh(script: 'codeql --version', returnStdout: true)
+    //sh(script: CODEQL_CLI_PATH + ' --version', returnStdout: true)
 
     // Cleaning up image
     println('Cleaning up image...')
