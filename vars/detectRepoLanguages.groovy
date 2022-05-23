@@ -33,7 +33,7 @@ String[] call() {
     println('Repository languages detected:' + repoLanguages)
     def repoLanguagesJSON = new groovy.json.JsonSlurper().parseText(repoLanguages)
 
-    String[] compiledLanguagesArray = CODEQL_COMPILED_LANGUAGES.split("|")
+    def compiledLanguagesArray = CODEQL_COMPILED_LANGUAGES.split("|")
     for (String language in compiledLanguagesArray) {
         println("debug language: " + language)
     }
