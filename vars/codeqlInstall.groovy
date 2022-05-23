@@ -2,8 +2,8 @@ String call(String version = 'latest') {
     /**
     * Gets the latest CodeQL bundle version.
     *
-    * @param version The version of the CodeQL bundle to get
-    * @return The value of latest version of the CodeQL bundle
+    * @param version The version of the CodeQL bundle to install
+    * @return The latest version of the CodeQL bundle
     */
 
     // If we specify 'latest', then go get the latest release
@@ -15,10 +15,4 @@ String call(String version = 'latest') {
         // TODO: get a specific version
         println('Need to implement: Get specific version. Version specified: ' + version)
     }
-
-    latestVersion = sh "curl --silent 'https://api.github.com/repos/github/codeql-action/releases/latest'"
-    
-    println('Latest version: ' + latestVersion)
-
-    return latestVersion
 }
