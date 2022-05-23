@@ -12,10 +12,10 @@ String[] call() {
         trimmedGitUrl = GIT_URL.split("@")[1]
         //uri = new URI(trimmed)
         server = trimmedGitUrl.split(":")[0]
-        orgRepo = trimmedGitUrl.split(":")[1].split(".")[0]
+        orgRepo = trimmedGitUrl.split(":")[1]
 
         sh 'printenv'
-        
+
     } else {                        // HTTPS
         println("HTTPS URL")
         uri = new URI(GIT_URL)
