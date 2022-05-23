@@ -8,7 +8,8 @@ List<String> call() {
     */
 
     println('Begin detect repository language procedure')
-    List<String> compiledLanguages, interpretedLanguages = new ArrayList<>()
+    def compiledLanguages = []
+    def interpretedLanguages = []
 
     // Parse GIT_URL so we can call the languages API
     String gitHost, gitOrgRepo
