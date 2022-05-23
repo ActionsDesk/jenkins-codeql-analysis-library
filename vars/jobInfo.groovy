@@ -5,6 +5,6 @@ String call() {
    * @return The username of the person who kicked off the build
    */
 
-  println*("Getting user id...")
+  println('Getting user id...')
   return currentBuild.rawBuild.getCause(Cause.UserIdCause).getUserId()
 }
