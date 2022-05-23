@@ -50,6 +50,7 @@ def call(String version, String os = 'linux') {
     //sh(script: 'ln -s ' + CODEQL_CLI_PATH + ' /usr/bin/codeql', returnStdout: true)
 
     // Display downloaded version
+    println('The workspace is: ' + ${WORKSPACE})
     println('CodeQL CLI Version')
     //sh(script: 'codeql --version', returnStdout: true)
     sh(script: CODEQL_CLI_PATH + ' --version', returnStdout: true)
