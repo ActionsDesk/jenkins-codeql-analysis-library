@@ -7,9 +7,9 @@ String call(String version, String os = 'linux') {
 
     println('Version requested to download: ' + version)
 
-    CODEQL_BIN_PATH = '/codeql'
-    CODEQL_CLI_ARCHIVE = '/codeql/codeql.tar.gz'
-    CODEQL_CLI_PATH = CODEQL_BIN_PATH + '/bin/codeql'
+    CODEQL_BIN_PATH = './codeql'
+    CODEQL_CLI_ARCHIVE = './codeql/codeql.tar.gz'
+    CODEQL_CLI_PATH = CODEQL_BIN_PATH + './bin/codeql'
 
     // https://github.com/github/codeql-action/releases
     switch (os) {
@@ -43,7 +43,7 @@ String call(String version, String os = 'linux') {
     // Extract archive
     println('Extracting archive...')
     sh(script: 'tar -xvzf ' + CODEQL_CLI_ARCHIVE + ' -C ' + CODEQL_BIN_PATH, returnStdout: true)
-    sh(script: 'mv /codeql/codeql /codeql/bin', returnStdout: true)
+    sh(script: 'mv ./codeql/codeql /codeql/bin', returnStdout: true)
 
     // Create bin symlink
     println('Create bin symlink...')
