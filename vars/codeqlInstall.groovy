@@ -1,15 +1,13 @@
-def call(String version, String os = 'linux') {
+String call(String version) {
     /**
-    * Downloads the requested CodeQL version
+    * Installs the requested CodeQL version
     *
     * @param version The version of the CodeQL bundle to download
     */
 
-    println('Version requested to download: ' + version)
+    println('Begin CodeQL Install procedure')
 
-    CODEQL_BIN_PATH = './codeql'
-    CODEQL_CLI_ARCHIVE = './codeql/codeql.tar.gz'
-    CODEQL_CLI_PATH = CODEQL_BIN_PATH + '/bin/codeql'
+    println('Version requested to install: ' + version)
 
     // https://github.com/github/codeql-action/releases
     switch (os) {
@@ -59,4 +57,6 @@ def call(String version, String os = 'linux') {
     // Cleaning up image
     println('Cleaning up image...')
     sh(script: 'rm -f ' + CODEQL_CLI_ARCHIVE, returnStdout: true)
+
+    return CODEQL_INSTALLED_VERSION
 }
