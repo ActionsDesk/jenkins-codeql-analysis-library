@@ -1,11 +1,14 @@
-String[] call() {
+String call() {
     /**
     *  Gets and returns the list of languages detected in the repository.
     *
     *  https://docs.github.com/en/rest/repos/repos#list-repository-languages
+    *
+    * @return Lists of the detected compiled and interpreted languages
     */
 
     println('Begin detect repository language procedure')
+    String compiledLanguages, interpretedLanguages
 
     // Parse GIT_URL so we can call the languages API
     String gitHost, gitOrgRepo
@@ -33,16 +36,25 @@ String[] call() {
     println('Repository languages detected:' + repoLanguages)
     def repoLanguagesJSON = new groovy.json.JsonSlurper().parseText(repoLanguages)
 
-    String[] compiledLanguagesArray = CODEQL_COMPILED_LANGUAGES.split(",")
-    for (String language in compiledLanguagesArray) {
-        println("debug language: " + language)
-    }
-
+    // Check for compiled and interpreted languages in the repo
+    String[] codeqlCompiledLanguages = CODEQL_COMPILED_LANGUAGES.split(",")
+    String[] codeqlInterpretedLanguages = CODEQL_INTERPRETED_LANGUAGES.split(",")
     repoLanguagesJSON.each {
-        println("jsonslurper: ${it.key}: ${it.value}")
+        //println("jsonslurper: ${it.key}: ${it.value}")
+        if (codeqlCompiledLanguages.contains(it.key)) {
+            println('CodeQL found compiled language: ' + it.key)
+            compiledLanguages.add(it.key)
+        } else if (codeqlInterpretedLanguages.contains(it.key)) {
+            println('CodeQL found interpreted language: ' + it.key)
+            interpretedLanguages.add(it.key)
+        } else {
+            println('CodeQL skipping language: ' + it.key)
+        }
     }
 
-    // Return the result
-    repoLanguagesTBD = "1.0.0"
-    return repoLanguagesTBD
+    // debug
+    println('compiledLanguages: ' + compiledLanguages)
+    println('interpretedLanguages: ' + interpretedLanguages)
+
+    return compiledLanguages, interpretedLanguages
 }
