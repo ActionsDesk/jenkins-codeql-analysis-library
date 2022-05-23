@@ -6,10 +6,10 @@ String[] call() {
     println('Begin detect repository language procedure')
 
     // https://docs.github.com/en/rest/repos/repos#list-repository-languages
-    
-    sh 'printenv'
-    //REPO_LANGUAGES_URL = TBD
+    URI uri = new URI(GIT_URL)
+    GITHUB_REPO_URL = uri.getHost()
 
+    println('GitHub Repo URL: ' + GITHUB_REPO_URL)
 
 
     GH_CLI_INSTALLED_VERSION = "1.0.0"
