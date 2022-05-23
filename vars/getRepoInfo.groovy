@@ -73,5 +73,5 @@ String parseRepoUrl() {
         gitOrgRepo = uri.getPath().replace(".git","")
     }
 
-    return (gitHost, gitOrgRepo)
+    return [gitHost, gitOrgRepo]
 }
