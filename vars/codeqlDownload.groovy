@@ -26,7 +26,7 @@ String call(String version, String os = 'linux') {
             bundleName = 'codeql-bundle.tar.gz'
     }
 
-    CODEQL_CLI_RELEASE_URL = 'https://github.com/github/codeql-action/releases/download/' + version + '/' + bundleName
+    CODEQL_CLI_RELEASE_URL = 'https://github.com/github/codeql-action/releases/' + version + '/download/' + bundleName
 
     // Check the values
     println('CodeQL URL: ' + CODEQL_CLI_RELEASE_URL)
