@@ -7,8 +7,12 @@ String call(String version = 'latest') {
     */
 
     println('Get CodeQL Version specified: ' + version)
-    latestVersion = sh "curl --silent 'https://api.github.com/repos/github/codeql-action/releases/latest'"
-    println('Latest version: ' + latestVersion)
+    
+    latestVersion = sh "curl --silent \"https://api.github.com/repos/github/codeql-action/releases/latest\" |" +
+                        "grep '\"tag_name\":' |" +
+                        "sed -E 's/.*\"([^\"]+)\".*/\1/'"
+
+    println('Retrieved the Latest version number: ' + latestVersion)
 
     return latestVersion
 }
