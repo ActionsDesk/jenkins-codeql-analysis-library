@@ -3,36 +3,35 @@ String[] call() {
     *  Gets and returns the list of languages detected in the repository.
     *
     *  https://docs.github.com/en/rest/repos/repos#list-repository-languages
-    *
     */
 
     println('Begin detect repository language procedure')
 
-    // 
-    String server, orgRepo
+    // Parse GIT_URL so we can call the languages API
+    String gitHost, gitOrgRepo
     if (GIT_URL.contains("@")) {    // SSH URL
         trimmedGitUrl = GIT_URL.split("@")[1]
         //uri = new URI(trimmed)
-        server = trimmedGitUrl.split(":")[0]
-        orgRepo = trimmedGitUrl.split(":")[1].replace(".git","")
+        gitHost = trimmedGitUrl.split(":")[0]
+        gitOrgRepo = trimmedGitUrl.split(":")[1].replace(".git","")
 
     } else {                        // HTTPS URL
         URI uri = new URI(GIT_URL)
-        server = uri.getHost()
-        orgRepo = uri.getPath().replace(".git","")
+        gitHost = uri.getHost()
+        gitOrgRepo = uri.getPath().replace(".git","")
     }
 
-    println('server: ' + server)
-    println('orgRepo: ' + orgRepo)
-    
-    // Temp
-    String tmpURL, tmpServer, tmpOrgRepo
-    tmpURL = 'https://github.com/github/odst.git'
-    URI tmpURI = new URI(tmpURL)
-    tmpServer = tmpURI.getHost()
-    tmpOrgRepo = tmpURI.getPath().replace(".git","")
-    println('tmpServer: ' + tmpServer)
-    println('tmpOrgRepo: ' + tmpOrgRepo)
+    println('gitHost: ' + gitHost)
+    println('gitOrgRepo: ' + gitOrgRepo)
+
+    // Call the languages API
+    String languagesUrl
+    if (gitHost == 'github.com')
+        languagesUrl = "https://api.github.com/repos/" + gitOrgRepo + "/languages"
+    else
+        languagesUrl = "https://" + gitHost + "/api/v3/repos/" + gitOrgRepo + "/languages"
+
+    println('languagesUrl: ' + languagesUrl)
 
     repoLanguages = "1.0.0"
     return repoLanguages
