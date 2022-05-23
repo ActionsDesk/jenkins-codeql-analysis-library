@@ -7,4 +7,5 @@ String call() {
 
     GH_CLI_INSTALLED_VERSION = "1.0.0"
     return GH_CLI_INSTALLED_VERSION
+
 }
