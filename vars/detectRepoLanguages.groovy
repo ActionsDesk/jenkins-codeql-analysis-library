@@ -12,7 +12,7 @@ String[] call() {
         trimmedGitUrl = GIT_URL.split("@")[1]
         //uri = new URI(trimmed)
         server = trimmedGitUrl.split(":")[0]
-        orgRepo = trimmedGitUrl.split(":")[1]
+        orgRepo = trimmedGitUrl.split(":")[1].replace(".git","")
 
         println('server: ' + server)
         println('orgRepo: ' + orgRepo)
