@@ -8,7 +8,7 @@ String[] call() {
     */
 
     println('Begin detect repository language procedure')
-    String[] compiledLanguages, interpretedLanguages
+    String[] compiledLanguages, interpretedLanguages = []
 
     // Parse GIT_URL so we can call the languages API
     String gitHost, gitOrgRepo
