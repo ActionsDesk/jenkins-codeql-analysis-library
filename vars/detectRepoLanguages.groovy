@@ -34,10 +34,9 @@ List<String> call() {
 
     // debug
     sh 'printenv'
-    println(credentials('AUTH_TOKEN'))
 
     // Call the languages API
-    repoLanguages = sh(script: "curl --request GET '${languagesUrl}' --header 'Accept: application/vnd.github.v3+json' --header 'Authorization: token ${AUTH_TOKEN}'", returnStdout: true).toString().trim()
+    repoLanguages = sh(script: "curl --request GET '${languagesUrl}' --header 'Accept: application/vnd.github.v3+json' --header 'Authorization: token ${credentials('AUTH_TOKEN')}'", returnStdout: true).toString().trim()
     println('Repository languages detected:' + repoLanguages)
     def repoLanguagesJSON = new groovy.json.JsonSlurper().parseText(repoLanguages)
 
