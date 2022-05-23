@@ -1,33 +1,39 @@
 String[] call() {
     /**
-    * Gets and returns the list of languages detected in the repository.
+    *  Gets and returns the list of languages detected in the repository.
+    *
+    *  https://docs.github.com/en/rest/repos/repos#list-repository-languages
+    *
     */
 
     println('Begin detect repository language procedure')
 
-    // https://docs.github.com/en/rest/repos/repos#list-repository-languages
-    URI uri
+    // 
     String server, orgRepo
-    if (GIT_URL.contains("@")) {    // SSH
+    if (GIT_URL.contains("@")) {    // SSH URL
         trimmedGitUrl = GIT_URL.split("@")[1]
         //uri = new URI(trimmed)
         server = trimmedGitUrl.split(":")[0]
         orgRepo = trimmedGitUrl.split(":")[1].replace(".git","")
 
-        println('server: ' + server)
-        println('orgRepo: ' + orgRepo)
-
-    } else {                        // HTTPS
-        println("HTTPS URL")
-        uri = new URI(GIT_URL)
+    } else {                        // HTTPS URL
+        URI uri = new URI(GIT_URL)
+        server = uri.getHost()
+        orgRepo = uri.getPath().replace(".git","")
     }
 
+    println('server: ' + server)
+    println('orgRepo: ' + orgRepo)
+    
+    // Temp
+    String tmpURL, tmpServer, tmpOrgRepo
+    tmpURL = 'https://github.com/github/odst.git'
+    URI tmpURI = new URI(tmpURL)
+    tmpServer = tmpURI.getHost()
+    tmpOrgRepo = tmpURI.getPath().replace(".git","")
+    println('tmpServer: ' + tmpServer)
+    println('tmpOrgRepo: ' + tmpOrgRepo)
 
-
-    GH_CLI_INSTALLED_VERSION = "1.0.0"
-    return GH_CLI_INSTALLED_VERSION
-
-
-    // def GH_CLI_INSTALLED_VERSION = githubCLIInstall()
-    // echo "The GitHub CLI installed version is: ${GH_CLI_INSTALLED_VERSION}"
+    repoLanguages = "1.0.0"
+    return repoLanguages
 }
