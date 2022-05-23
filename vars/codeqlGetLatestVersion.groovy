@@ -1,8 +1,7 @@
-String call(String version = 'latest') {
+String call() {
     /**
-    * Gets the latest CodeQL bundle version.
+    * Gets the latest CodeQL bundle version number.
     *
-    * @param version The version of the CodeQL bundle to get
     * @return The value of latest version of the CodeQL bundle
     */
 
