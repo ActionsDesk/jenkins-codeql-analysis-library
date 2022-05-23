@@ -11,19 +11,8 @@ List<String> getLanguages(String CREDID) {
     def compiledLanguages = []
     def interpretedLanguages = []
 
-    // Parse GIT_URL so we can call the languages API
-    String gitHost, gitOrgRepo
-    if (GIT_URL.contains("@")) {    // SSH URL
-        trimmedGitUrl = GIT_URL.split("@")[1]
-        //uri = new URI(trimmed)
-        gitHost = trimmedGitUrl.split(":")[0]
-        gitOrgRepo = trimmedGitUrl.split(":")[1].replace(".git","")
-
-    } else {                        // HTTPS URL
-        URI uri = new URI(GIT_URL)
-        gitHost = uri.getHost()
-        gitOrgRepo = uri.getPath().replace(".git","")
-    }
+    // Parse out the host and org/repo from the GIT_URL
+    gitHost, gitOrgRepo = parseRepoUrl()
 
     println('gitHost: ' + gitHost)
     println('gitOrgRepo: ' + gitOrgRepo)
@@ -60,4 +49,27 @@ List<String> getLanguages(String CREDID) {
     println('CodeQL-supported interpreted languages found: ' + interpretedLanguages)
 
     return [compiledLanguages, interpretedLanguages]
+}
+
+String parseRepoUrl() {
+    /**
+    *  Parses the GIT_URL passed by the Jenkins job into host, org, and repo values.
+    *
+    * @return The repository's host, org, and repo values
+    */
+
+    String gitHost, gitOrgRepo
+    if (GIT_URL.contains("@")) {    // SSH URL
+        trimmedGitUrl = GIT_URL.split("@")[1]
+        //uri = new URI(trimmed)
+        gitHost = trimmedGitUrl.split(":")[0]
+        gitOrgRepo = trimmedGitUrl.split(":")[1].replace(".git","")
+
+    } else {                        // HTTPS URL
+        URI uri = new URI(GIT_URL)
+        gitHost = uri.getHost()
+        gitOrgRepo = uri.getPath().replace(".git","")
+    }
+
+    return [gitHost, gitOrgRepo]
 }
