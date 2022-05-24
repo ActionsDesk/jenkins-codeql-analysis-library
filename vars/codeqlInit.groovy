@@ -45,7 +45,6 @@ def call() {
 
             // If CODEQL_TRACING = "1", then swap to using indirect build tracing
             // https://codeql.github.com/docs/codeql-cli/creating-codeql-databases/#using-indirect-build-tracing
-
             if (CODEQL_TRACING == "1") {
                 codeqlCreate = "codeql database init --begin-tracing --language=${language} --source-root=. ${codeqlDatabase}"
 
@@ -56,6 +55,23 @@ def call() {
 
             // Check our command
             println("CodeQL create command: ${codeqlCreate}")
+
+            // Create the database
+            sh(script: "${codeqlCreate}", returnStdout: true)
+
+            // If CODEQL_TRACING = "1", then start tracing
+            if (CODEQL_TRACING == "1") {
+
+                println("CodeQL -> Starting tracing")
+                sh(script: "source ${codeqlDatabase}/temp/tracingEnvironment/start-tracing.sh", returnStdout: true)
+
+            // Otherwise, run autobuild
+            } else {
+
+                String codeqlAutoBuildPath = getCodeqlAutoBuildPath(language)
+                println("Running CodeQL auto-build :: ${codeqlAutoBuildPath}")
+                sh(script: "${codeqlAutoBuildPath}", returnStdout: true)
+            }
         }
 
     }
@@ -101,4 +117,13 @@ String codeqlCreateCommand(String language) {
 
     String command = "codeql database create --language=${language}"
     return command
+}
+
+String getCodeqlAutoBuildPath(String language) {
+    /**
+    * Gets the CodeQL auto-build path for the given language
+    */
+
+    String codeqlAutoBuildPath = "${CODEQL_BIN_PATH}/${language}/tools/autobuild.sh"
+    return codeqlAutoBuildPath
 }
