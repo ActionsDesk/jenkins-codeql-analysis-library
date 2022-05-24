@@ -8,6 +8,7 @@ List<String> getLanguages(String CREDID) {
     */
 
     println('Begin detect repository language procedure')
+
     def compiledLanguages = []
     def interpretedLanguages = []
 
@@ -19,36 +20,48 @@ List<String> getLanguages(String CREDID) {
     println('gitHost: ' + gitHost)
     println('gitOrgRepo: ' + gitOrgRepo)
 
-    // Form the languages API URL
-    String languagesUrl = (gitHost == 'github.com') ? "https://api.github.com/repos/${gitOrgRepo}/languages" : "https://${gitHost}/api/v3/repos/${gitOrgRepo}/languages"
-    println('languagesUrl: ' + languagesUrl)
+    if (AUTO_DETECT == 0) {
 
-    // Call the languages API with credential
-    withCredentials([string(credentialsId: "${CREDID}", variable: 'AUTHTOKEN')]) {
-        repoLanguages = sh(script: "curl --request GET '${languagesUrl}' --header 'Accept: application/vnd.github.v3+json' --header 'Authorization: token ${AUTHTOKEN}'", returnStdout: true).toString().trim()
-    }
-    println('All repository languages detected:' + repoLanguages)
-    def repoLanguagesJSON = new groovy.json.JsonSlurper().parseText(repoLanguages)
+        // TODO: Implement manually providing languages
 
-    // Check for compiled and interpreted languages in the repo
-    String[] codeqlCompiledLanguages = CODEQL_COMPILED_LANGUAGES.split(",")
-    String[] codeqlInterpretedLanguages = CODEQL_INTERPRETED_LANGUAGES.split(",")
-    repoLanguagesJSON.each {
-        //println("jsonslurper: ${it.key}: ${it.value}")
-        if (codeqlCompiledLanguages.contains(it.key)) {
-            println('CodeQL found compiled language: ' + it.key)
-            compiledLanguages.add(it.key)
-        } else if (codeqlInterpretedLanguages.contains(it.key)) {
-            println('CodeQL found interpreted language: ' + it.key)
-            interpretedLanguages.add(it.key)
-        } else {
-            println('CodeQL skipping language: ' + it.key)
+    } else if (AUTO_DETECT == 1) {
+
+        // Form the languages API URL
+        String languagesUrl = (gitHost == 'github.com') ? "https://api.github.com/repos/${gitOrgRepo}/languages" : "https://${gitHost}/api/v3/repos/${gitOrgRepo}/languages"
+        println('languagesUrl: ' + languagesUrl)
+
+        // Call the languages API with credential
+        withCredentials([string(credentialsId: "${CREDID}", variable: 'AUTHTOKEN')]) {
+            repoLanguages = sh(script: "curl --request GET '${languagesUrl}' --header 'Accept: application/vnd.github.v3+json' --header 'Authorization: token ${AUTHTOKEN}'", returnStdout: true).toString().trim()
         }
-    }
+        println('All repository languages detected:' + repoLanguages)
+        def repoLanguagesJSON = new groovy.json.JsonSlurper().parseText(repoLanguages)
 
-    // debug
-    println('CodeQL-supported compiled languages found: ' + compiledLanguages)
-    println('CodeQL-supported interpreted languages found: ' + interpretedLanguages)
+        // Check for compiled and interpreted languages in the repo
+        String[] codeqlCompiledLanguages = CODEQL_COMPILED_LANGUAGES.split(",")
+        String[] codeqlInterpretedLanguages = CODEQL_INTERPRETED_LANGUAGES.split(",")
+        repoLanguagesJSON.each {
+            //println("jsonslurper: ${it.key}: ${it.value}")
+            if (codeqlCompiledLanguages.contains(it.key)) {
+                println('CodeQL found compiled language: ' + it.key)
+                compiledLanguages.add(it.key)
+            } else if (codeqlInterpretedLanguages.contains(it.key)) {
+                println('CodeQL found interpreted language: ' + it.key)
+                interpretedLanguages.add(it.key)
+            } else {
+                println('CodeQL skipping language: ' + it.key)
+            }
+        }
+
+        // debug
+        println('CodeQL-supported compiled languages found: ' + compiledLanguages)
+        println('CodeQL-supported interpreted languages found: ' + interpretedLanguages)
+
+    } else {
+
+        println('ERROR: AUTO_DETECT must be 0 or 1')
+
+    }
 
     return [compiledLanguages, interpretedLanguages]
 }

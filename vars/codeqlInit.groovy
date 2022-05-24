@@ -9,9 +9,15 @@ def call() {
 
     // Display info about the repository
     sh 'printenv'
-    String githubRepository = getRepoInfo.parseGitUrl()
-    String githubRef = ""
+    String gitHost
+    String gitOrgRepo
+
+    (gitHost, gitOrgRepo) = parseGitUrl()
+
+    println("GitHub Repository URL: ${GIT_URL}")
+    println("Github Ref: ${GIT_COMMIT}")
+
     
-    println("Github Repository: ${githubRepository}")
+
 
 }
