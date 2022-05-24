@@ -12,12 +12,12 @@ def call() {
     String gitHost
     String gitOrgRepo
 
-    (gitHost, gitOrgRepo) = parseGitUrl()
+    (gitHost, gitOrgRepo) = getRepoInfo.parseGitUrl()
 
     println("GitHub Repository URL: ${GIT_URL}")
     println("Github Ref: ${GIT_COMMIT}")
 
-    
+
 
 
 }
