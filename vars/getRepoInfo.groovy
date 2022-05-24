@@ -9,6 +9,7 @@ List<String> getLanguages(String CREDID) {
 
     println('Begin detect repository language procedure')
 
+    String languagesUrl
     def compiledLanguages = []
     def interpretedLanguages = []
 
@@ -28,16 +29,17 @@ List<String> getLanguages(String CREDID) {
     } else if (AUTO_DETECT == "1") {
 
         // Form the languages API URL
-        /*String languagesUrl = (gitHost == 'github.com') ? "https://api.github.com/repos/${gitOrgRepo}/languages" : "https://${gitHost}/api/v3/repos/${gitOrgRepo}/languages"
+        /*languagesUrl = (gitHost == 'github.com') ? "https://api.github.com/repos/${gitOrgRepo}/languages" : "https://${gitHost}/api/v3/repos/${gitOrgRepo}/languages"
         println('languagesUrl: ' + languagesUrl)
         withCredentials([string(credentialsId: "${CREDID}", variable: 'AUTHTOKEN')]) {
             repoLanguages = sh(script: "curl --request GET '${languagesUrl}' --header 'Accept: application/vnd.github.v3+json' --header 'Authorization: token ${AUTHTOKEN}'", returnStdout: true).toString().trim()
         }*/
 
         // Debug: Use this block to test the languages API
-        String languagesUrl = "https://api.github.com/repos/microsoft/vscode/languages"
+        languagesUrl = "https://api.github.com/repos/microsoft/vscode/languages"
         println('languagesUrl: ' + languagesUrl)
         repoLanguages = sh(script: "curl --request GET '${languagesUrl}' --header 'Accept: application/vnd.github.v3+json'", returnStdout: true).toString().trim()
+        
 
         // Proceed after calling the languages API
         println('All repository languages detected:' + repoLanguages)

@@ -40,9 +40,22 @@ def call() {
             deleteOldDatabase(codeqlDatabase)
 
             codeqlCreate = codeqlCreateCommand(language)
-            println("CodeQL create command: ${codeqlCreate}")
 
-            // TODO
+            // TODO: Add build command support here, if needed
+
+            // If CODEQL_TRACING = "1", then swap to using indirect build tracing
+            // https://codeql.github.com/docs/codeql-cli/creating-codeql-databases/#using-indirect-build-tracing
+
+            if (CODEQL_TRACING == "1") {
+                codeqlCreate = "codeql database init --begin-tracing --language=${language} --source-root=. ${codeqlDatabase}"
+
+            // Otherwise, only append the database
+            } else {
+                codeqlCreate = "${codeqlCreate} ${codeqlDatabase}"
+            }
+
+            // Check our command
+            println("CodeQL create command: ${codeqlCreate}")
         }
 
     }
