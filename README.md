@@ -14,6 +14,7 @@ At a high level, the purpose of this library is to perform the following:
 - Run commands in plugin block
 - Run finalize and analyze commands on all databases
 - Upload results to the project repository
+- Track timing/overhead of each step
 
 ## References
 
