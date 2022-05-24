@@ -7,6 +7,7 @@ This [shared library](https://jenkins.io/doc/book/pipeline/shared-libraries/) al
 At a high level, the purpose of this library is to perform the following:
 
 - Download CodeQL
+  - Optionally, retrieve from Artifactory
 - Detect languages of the project
 - Run dynamic CodeQL init step
 - if (language == compiled)
