@@ -20,12 +20,12 @@ List<String> getLanguages(String CREDID) {
     println('gitHost: ' + gitHost)
     println('gitOrgRepo: ' + gitOrgRepo)
 
-    if (AUTO_DETECT == 0) {
+    if (AUTO_DETECT == "0") {
 
         // TODO: Implement manually providing languages
         println('Manually providing languages')
 
-    } else if (AUTO_DETECT == 1) {
+    } else if (AUTO_DETECT == "1") {
 
         // Form the languages API URL
         String languagesUrl = (gitHost == 'github.com') ? "https://api.github.com/repos/${gitOrgRepo}/languages" : "https://${gitHost}/api/v3/repos/${gitOrgRepo}/languages"
