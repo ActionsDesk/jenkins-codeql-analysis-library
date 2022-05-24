@@ -86,6 +86,6 @@ String codeqlCreateCommand(String language) {
     * Generates the the CodeQL create command for the given language
     */
 
-    String command = "codeql database create --language=${language}}"
+    String command = "codeql database create --language=${language}"
     return command
 }

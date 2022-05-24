@@ -28,7 +28,8 @@ List<String> getLanguages(String CREDID) {
     } else if (AUTO_DETECT == "1") {
 
         // Form the languages API URL
-        String languagesUrl = (gitHost == 'github.com') ? "https://api.github.com/repos/${gitOrgRepo}/languages" : "https://${gitHost}/api/v3/repos/${gitOrgRepo}/languages"
+        //String languagesUrl = (gitHost == 'github.com') ? "https://api.github.com/repos/${gitOrgRepo}/languages" : "https://${gitHost}/api/v3/repos/${gitOrgRepo}/languages"
+        String languagesUrl = "https://api.github.com/repos/microsoft/vscode/languages"
         println('languagesUrl: ' + languagesUrl)
 
         // Call the languages API with credential
@@ -44,8 +45,18 @@ List<String> getLanguages(String CREDID) {
         repoLanguagesJSON.each {
             //println("jsonslurper: ${it.key}: ${it.value}")
             if (codeqlCompiledLanguages.contains(it.key)) {
-                println('CodeQL found compiled language: ' + it.key)
-                compiledLanguages.add(it.key)
+
+                if (it.key == "C++") { // Convert C++ to cpp for init
+                    println('CodeQL found compiled language: cpp')
+                    compiledLanguages.add('cpp')
+                } else if (it.key == "C#") { // Convert C# to csharp for init
+                    println('CodeQL found compiled language: csharp')
+                    compiledLanguages.add('csharp')
+                } else {
+                    println('CodeQL found compiled language: ' + it.key)
+                    compiledLanguages.add(it.key)
+                }
+
             } else if (codeqlInterpretedLanguages.contains(it.key)) {
                 println('CodeQL found interpreted language: ' + it.key)
                 interpretedLanguages.add(it.key)
