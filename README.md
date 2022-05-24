@@ -22,6 +22,10 @@ A list of helpful references:
 - [CodeQL CLI Binaries](https://github.com/github/codeql-cli-binaries/releases)
 - [Creating CodeQL databases](https://codeql.github.com/docs/codeql-cli/creating-codeql-databases/), including [using indirect build tracing](https://codeql.github.com/docs/codeql-cli/creating-codeql-databases/#using-indirect-build-tracing)
 
+## Sample pipeline
+
+🚧 Add sample pipeline usage here.
+
 ## Known issues
 
 A list of known issues is available on the [GitHub issues page of this project][jenkins-codeql-lib-issues].
