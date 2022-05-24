@@ -58,12 +58,12 @@ List<String> getLanguages(String CREDID) {
                     compiledLanguages.add('csharp')
                 } else {
                     println('CodeQL found compiled language: ' + it.key)
-                    compiledLanguages.add(it.key)
+                    compiledLanguages.add(it.key.toLowerCase())
                 }
 
             } else if (codeqlInterpretedLanguages.contains(it.key)) {
                 println('CodeQL found interpreted language: ' + it.key)
-                interpretedLanguages.add(it.key)
+                interpretedLanguages.add(it.key.toLowerCase())
             } else {
                 println('CodeQL skipping language: ' + it.key)
             }
