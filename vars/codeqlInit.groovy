@@ -63,7 +63,7 @@ def call() {
             if (CODEQL_TRACING == "1") {
 
                 println("CodeQL -> Starting tracing")
-                sh(script: "source ${codeqlDatabase}/temp/tracingEnvironment/start-tracing.sh", returnStdout: true)
+                //sh(script: "source ${codeqlDatabase}/temp/tracingEnvironment/start-tracing.sh", returnStdout: true)
 
             // Otherwise, run autobuild
             } else {
