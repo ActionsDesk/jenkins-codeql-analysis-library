@@ -23,6 +23,7 @@ List<String> getLanguages(String CREDID) {
     if (AUTO_DETECT == 0) {
 
         // TODO: Implement manually providing languages
+        println('Manually providing languages')
 
     } else if (AUTO_DETECT == 1) {
 
