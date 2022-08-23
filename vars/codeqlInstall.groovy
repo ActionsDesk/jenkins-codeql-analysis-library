@@ -58,6 +58,7 @@ String call(String version) {
     println('The workspace is: ' + WORKSPACE)
     env.PATH = env.PATH + ':' + CODEQL_BIN_PATH + '/bin'
     println('ENV: ' + env.PATH)
+    println(sh(script: CODEQL_BIN_PATH + '/bin', returnStdout: true))
     CODEQL_INSTALLED_VERSION = sh(script: 'codeql --version', returnStdout: true)
     //sh(script: CODEQL_CLI_PATH + ' --version', returnStdout: true)
     println('CodeQL CLI Version: ' + CODEQL_INSTALLED_VERSION)
