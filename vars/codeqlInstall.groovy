@@ -8,6 +8,8 @@ String call(String version) {
     println('Begin CodeQL Install procedure')
 
     println('Version requested to install: ' + version)
+    
+    os = System.properties['os.name'].toLowerCase()
 
     // https://github.com/github/codeql-action/releases
     switch (os) {
