@@ -5,7 +5,7 @@ String call() {
     * @return The value of latest version of the CodeQL bundle
     */
 
-    releasesUrl = 'https://api.github.com/repos/github/codeql-action/releases/latest'
+    releasesUrl = 'https://api.github.com/repos/github/codeql-cli-binaries/releases/latest'
 
     latestVersion = sh(script: "curl --silent '${releasesUrl}' | grep '\"tag_name\":'", returnStdout: true).toString().trim()
     latestVersion = latestVersion.split('\"')[3].trim()
