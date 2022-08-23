@@ -47,6 +47,7 @@ String call(String version) {
     println('Extracting archive...')
     println(sh(script: 'file ' + CODEQL_CLI_ARCHIVE, returnStdout: true))
     sh(script: 'unzip ' + CODEQL_CLI_ARCHIVE + ' -d ' + CODEQL_BIN_PATH, returnStdout: true)
+    println(sh(script: 'ls -al; ls -al ' + CODEQL_BIN_PATH, returnStdout: true))
     sh(script: 'mv ./codeql/codeql ./codeql/bin', returnStdout: true)
 
     // Create bin symlink
