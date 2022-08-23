@@ -47,8 +47,6 @@ String call(String version) {
     println('Extracting archive...')
     println(sh(script: 'file ' + CODEQL_CLI_ARCHIVE, returnStdout: true))
     sh(script: 'unzip ' + CODEQL_CLI_ARCHIVE + ' -d ' + CODEQL_BIN_PATH, returnStdout: true)
-    println(sh(script: 'ls -al; ls -al ' + CODEQL_BIN_PATH, returnStdout: true))
-    sh(script: 'mv ' + CODEQL_BIN_PATH + '/codeql/codeql ' + CODEQL_BIN_PATH + '/codeql/bin', returnStdout: true)
 
     // Create bin symlink
     //println('Create bin symlink...')
@@ -56,7 +54,7 @@ String call(String version) {
 
     // Display downloaded version
     println('The workspace is: ' + WORKSPACE)
-    env.PATH = env.PATH + ':' + CODEQL_BIN_PATH + '/bin'
+    env.PATH = env.PATH + ':' + CODEQL_BIN_PATH
     println('ENV: ' + env.PATH)
     println(sh(script: 'ls -al ' + CODEQL_BIN_PATH, returnStdout: true))
     println(sh(script: 'ls -al ' + CODEQL_BIN_PATH + '/bin', returnStdout: true))
