@@ -27,7 +27,8 @@ String call(String version) {
     }
 
     CODEQL_CLI_RELEASE_URL = 'https://github.com/github/codeql-cli-binaries/releases/download/' + version + '/' + bundleName
-    CODEQL_CLI_PATH = File.createTempDir()
+    //CODEQL_CLI_PATH = File.createTempDir()
+    CODEQL_CLI_PATH = 'codeql'
     CODEQL_BIN_PATH = CODEQL_CLI_PATH
     CODEQL_CLI_ARCHIVE = bundleName
 
