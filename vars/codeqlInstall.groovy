@@ -45,7 +45,7 @@ String call(String version) {
 
     // Extract archive
     println('Extracting archive...')
-    println(sh(script: 'pwd; ls -al', returnStdout: true))
+    println(sh(script: 'file ' + CODEQL_CLI_ARCHIVE, returnStdout: true))
     sh(script: 'unzip ' + CODEQL_CLI_ARCHIVE + ' -d ' + CODEQL_BIN_PATH, returnStdout: true)
     sh(script: 'mv ./codeql/codeql ./codeql/bin', returnStdout: true)
 
