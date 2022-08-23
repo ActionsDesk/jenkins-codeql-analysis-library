@@ -14,16 +14,16 @@ String call(String version) {
     // https://github.com/github/codeql-action/releases
     switch (os) {
         case 'linux':
-            bundleName = 'codeql-bundle-linux64.tar.gz'
+            bundleName = 'codeql-linux64.zip'
             break
         case 'macos':
-            bundleName = 'codeql-bundle-macos64.tar.gz'
+            bundleName = 'codeql-osx64.zip'
             break
         case 'windows':
-            bundleName = 'codeql-bundle-win64.zip'
+            bundleName = 'codeql-win64.zip'
             break
         default:
-            bundleName = 'codeql-bundle.tar.gz'
+            bundleName = 'codeql.zip'
     }
 
     CODEQL_CLI_RELEASE_URL = 'https://github.com/github/codeql-cli-binaries/releases/' + version + '/download/' + bundleName
@@ -45,7 +45,7 @@ String call(String version) {
 
     // Extract archive
     println('Extracting archive...')
-    sh(script: 'tar -xvzf ' + CODEQL_CLI_ARCHIVE + ' -C ' + CODEQL_BIN_PATH, returnStdout: true)
+    sh(script: 'unzip ' + CODEQL_CLI_ARCHIVE + ' -d ' + CODEQL_BIN_PATH, returnStdout: true)
     sh(script: 'mv ./codeql/codeql ./codeql/bin', returnStdout: true)
 
     // Create bin symlink
